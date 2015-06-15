@@ -1,0 +1,203 @@
+# Quiz 1
+
+
+#1
+write a one-line program that creates 10 lines of the following:
+The Flintstones Rock!
+ The Flintstones Rock!
+  The Flintstones Rock!
+
+review this one
+
+THEIR SOLUTION
+10.times { |num| puts (" " * num) + "The Flintstones Rock!" }
+
+
+#2
+Create a hash that expresses the frequency with which each letter occurs in this string:
+s = "The Flintstones Rock"
+
+s = s.split("")
+
+s.delete_if {|x| x == " "}
+
+hash = Hash.new 0 
+
+s.each do |word|
+  hash[word] += 1
+end
+
+THEIR SOLUTION
+result = {}
+letters = ('A'..'Z').to_a + ('a'..'z').to_a #NOTE - This wasn't working bc I was using ("A".."z")
+letters.each do |letter|
+  letter_frequency = statement.scan(letter).count
+  result[letter] = letter_frequency if letter_frequency > 0
+end
+
+
+#3
+The result of the following statement will be an error:
+puts "the value of 40 + 2 is " + (40 + 2)
+Why is this and what are two possible ways to fix this?
+
+-You're trying to concatenate a string and integer.
+You could do:
+
+puts "the value of 40 + 2 is " + (40 + 2).to_s
+OR
+
+puts "the value of 40 + 2 is #{40+2}"
+
+
+#4
+What happens when we modify an array while we are iterating over it?
+What would be output by this code?
+
+numbers = [1, 2, 3, 4]
+numbers.each do |number|
+  p number
+  numbers.shift(1)
+end
+
+output would be:
+1
+2
+3
+4
+# This was wrong, he loop counter used by #each is compared against the 
+current length of the array rather than its original length.  It's working by counting
+the index from the original array.  For ex: after shifting 1 (at index 0) it's going to work on index
+1 which is now 3, etc.  So this will only print 1, 3.
+
+"In both cases we see that iterators DO NOT work on a copy of the original array or from stale meta-data
+(length) about the array. They operate on the original array in real time."
+
+What would be output by this code?
+
+numbers = [1, 2, 3, 4]
+numbers.each do |number|
+  p number
+  numbers.pop(1)
+end
+
+output would be:
+1
+2
+
+
+#5
+def factors(number)
+  dividend = number
+  divisors = []
+  begin
+    divisors << number / dividend if number % dividend == 0
+    if number > 0
+      dividend -= 1
+    elsif number < 0
+      dividend += 1
+    end
+  end until dividend == 0
+  divisors
+end
+
+THEIR SOLUTION:
+while dividend > 0 do
+  divisors << number / dividend if number % dividend == 0
+  dividend -= 1
+end
+
+
+Bonus 1
+What is the purpose of the number % dividend == 0 ?
+-The modulus checks that the number is actually divisible (without remainders) by the 
+potential dividend 
+
+Bonus 2
+What is the purpose of the second-to-last line in the method (the divisors before the method's end)?
+-To return the answer, ie the entire array of divisors, otherwise it would only return the very
+last divisor
+
+
+#6
+Alyssa was asked to write an implementation of a rolling buffer. Elements are added to the rolling 
+buffer and if the buffer becomes full, then new elements that are added will displace the oldest 
+elements in the buffer.
+
+She wrote two implementations saying, "Take your pick. Do you like << or + for modifying the buffer?". 
+Is there a difference between the two, other than what operator she chose to use to add an element 
+to the buffer?
+
+- Yes, the + won't permanently alter the array, << will. 
+
+THEIR SOLUTION:
+Yes, there is a difference. While both methods have the same return value, in the first 
+implementation, the input argument called buffer will be modified and will end up being 
+changed after rolling_buffer1 returns. That is, the caller will have the input array that 
+they pass in be different once the call returns. In the other implementation, rolling_buffer2 
+will not alter the caller's input argument.
+
+
+#7
+
+def fib(first_num, second_num)
+  limit = 15
+  while second_num < limit
+    sum = first_num + second_num
+    first_num = second_num
+    second_num = sum
+  end
+  sum
+end
+
+result = fib(0, 1)
+puts "result is #{result}"
+
+- Include the limit variable within the method, otherwise it can't be accessed.
+
+
+#8 
+Write your own version of the rails titleize!
+
+def titlelize(string)
+  down_title = string.split
+  title = down_title.map { |word| word.downcase.capitalize!}.join(' ')
+  p title
+end
+
+THEIR SOLUTION: words.split.map { |word| word.downcase.capitalize }.join(' ')
+- IMPORTANT to actually downcase first, otherwise I could get nil!!!
+
+#9 
+Modify the hash such that each member of the Munster family has an additional "age_group" key 
+that has one of three values describing the age group the family member is in (kid, adult, or senior).
+A kid is in the age range 0 - 17, an adult is in the range 18 - 64 and a senior is aged 65+.
+
+munsters = { 
+  "Herman" => { "age" => 32, "gender" => "male" }, 
+  "Lily" => { "age" => 30, "gender" => "female" }, 
+  "Grandpa" => { "age" => 402, "gender" => "male" }, 
+  "Eddie" => { "age" => 10, "gender" => "male" },
+  "Marilyn" => { "age" => 23, "gender" => "female"}
+}
+
+THEIR SOLUTION:
+munsters.each do |name, details|
+  case details["age"]
+  when 0...18
+    details["age_group"] = "kid"
+  when 18...65
+    details["age_group"] = "adult"
+  else 
+    details["age_group"] = "senior"
+  end
+end
+
+
+
+
+
+
+
+
+

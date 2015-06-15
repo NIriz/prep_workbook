@@ -1,0 +1,114 @@
+# Quiz 2
+
+#2
+Add up all of the ages from our current Munster family hash:
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10, "Marilyn" => 22, "Spot" => 237 }
+
+ages_arry = ages.values
+
+def total(arr)
+  sum = 0 
+  ages_arry.map {|a| sum += a}
+  p sum
+end
+
+total(ages_arry)
+
+THEIR SOLUTION:
+ages.values.inject(:+)
+
+
+#3
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 402, "Eddie" => 10 }
+throw out the really old people (age 100 or older)
+
+ages.values.select! { |a| a>99}
+
+THEIR SOLUTION:
+ages.keep_if { |name, age| age < 100 }
+
+
+#4
+m = "The Munsters are creepy in a good way."
+Convert the string in the following ways:
+"The munsters are creepy in a good way." -> m.gsub('Munsters', 'munsters')
+"tHE mUNSTERS ARE CREEPY IN A GOOD WAY." -> m.gsub!('The M', 'tHE m'), m.gsub('unsters are creepy in a good way', 'unsters are creepy in a good way'.upcase)
+"the munsters are creepy in a good way." -> m.downcase
+"THE MUNSTERS ARE CREEPY IN A GOOD WAY." -> m.upcase
+
+THEIR SOLUTION:
+munsters_description.capitalize!
+munsters_description.swapcase!
+
+
+
+#5
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10 }
+
+Add these:
+additional_ages = { "Marilyn" => 22, "Spot" => 237 }
+ages.merge(additional_ages)
+
+#6
+Pick out the minimum age from our current Munster family hash:
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10, "Marilyn" => 22, "Spot" => 237 }
+
+ages = ages.values.sort
+p ages[0]
+
+THEIR SOLUTION: ages.values.min
+
+
+#7
+See if the name "Dino" appears in the string below:
+advice = "Few things in life are as important as house training your pet dinosaur."
+advice.include?("Dino")
+
+THEIR SOLUTION: advice.match("Dino")
+
+
+#8
+Find the index of the first name that starts with "Be"
+flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+
+flintstones.select! { |n| n.start_with?("Be") }
+
+THEIR SOLUTION: flintstones.index { |name| name[0, 2] == "Be" }
+- Their solution also works with: flintstones.select { |name| name[0, 2] == "Be" }
+  Not sure why .index was used when we don't care about returning the index?
+
+
+#9
+Using array#map!, shorten each of these names to just 3 characters:
+
+flint = %w(Fred Barney Wilma Betty BamBam Pebbles)
+
+flint.map {|n| n.slice!(3..-1)} 
+
+THEIR SOLUTION:
+flintstones.map! do |name|
+  name[0, 3]
+end
+
+#10
+THEIR 1 LINE SOLUTION:
+flintstones.map! { |name| name[0,3] }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

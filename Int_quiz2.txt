@@ -1,0 +1,127 @@
+#1
+Figure out the total age of just the male members of the family.
+
+munsters = { 
+  "Herman" => { "age" => 32, "gender" => "male" }, 
+  "Lily" => { "age" => 30, "gender" => "female" }, 
+  "Grandpa" => { "age" => 402, "gender" => "male" }, 
+  "Eddie" => { "age" => 10, "gender" => "male" } 
+}
+
+THEIR SOLUTION:
+total_male_age = 0
+munsters.each do |name, details|
+  total_male_age += details["age"] if details["gender"] == "male"
+end
+
+
+#2
+print out the name, age and gender of each family member like this: 
+(Name) is a (age) year old (male or female).
+
+munsters.each do |name, details|
+  puts "#{name} is a #{details["age"]} year old #{details["gender"]}."
+end
+
+
+#3
+How can we refactor this exercise to make the result easier to 
+predict and easier for the next programmer to maintain?
+
+def tricky_method(a_string_param, an_array_param)
+  a_string_param += "rutabega"
+  an_array_param << "rutabega"
+  return a_string_param, an_array_param
+end
+
+my_string = "pumpkins"
+my_array = ["pumpkins"]
+tricky_method(my_string, my_array)
+
+puts "My string looks like this now: #{my_string}"
+puts "My array looks like this now: #{my_array}"
+
+
+THEIR SOLUTION:
+def not_so_tricky_method(a_string_param, an_array_param)
+  a_string_param += "rutabega"
+  an_array_param += ["rutabega"]
+
+  return a_string_param, an_array_param
+end
+
+my_string = "pumpkins"
+my_array = ["pumpkins"]
+a_string_param, an_array_param = not_so_tricky_method(my_string, my_array)
+
+puts "My string looks like this now: #{my_string}"
+puts "My array looks like this now: #{my_array}"
+
+
+
+#4
+A common idiom used to solve this conundrum is to use the String#split and String#join 
+methods to break our string up and then put it back together again.
+
+Use this technique to break up the following string and put it back
+together with the words in reverse order:
+
+sentence = "Humpty Dumpty sat on a wall."
+
+sentence.split.to_a.reverse!.join(" ")
+
+THEIR SOLUTION:
+words = sentence.split(/\W/)
+words.reverse!
+backwards_sentence = words.join(' ') + '.'
+
+
+
+#5
+What is the output of the following code? A: 34
+
+
+answer = 42
+
+def mess_with_it(some_number)
+  some_number += 8
+end
+
+new_answer = mess_with_it(answer)
+
+p answer - 8
+
+
+
+#6
+The original hash should still exist outside of the one that was messed up by the method because
+I don't think each do should permanently affect the original hash. WRONG.
+EXPLANATION:
+
+Remember that in Ruby, what gets passed in the parameter list is not what it appears. 
+Under the hood, ruby passes the object id of each item rather than the value of the parameter. 
+The method internally stores these object id's in locally scoped (private to the method) 
+variables (named per the method definition's parameter list).
+So Spot's demo_hash starts off pointing to the munsters hash. His program could wind up 
+replacing that with some other object id and then the family's data would be safe. [unsure
+if what they mean by this is reassigning the edited hash to a new variable/name in
+order to leave the original hash intact]
+In this case, the program does not reassign demo_hash -- it just uses it as-is. 
+So the actual hash object that is being messed with inside of the method IS the munsters hash.
+
+
+
+#7
+I think, not enough arguments bc it's :
+puts rps('paper')
+
+WRONG - I solved the parentheses in the wrong order.  'Paper' is the correct answer.
+
+
+#8
+'no'
+
+
+
+
+
